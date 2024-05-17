@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using SmartFormat.Core.Extensions;
 using SmartFormat.Core.Formatting;
 using SmartFormat.Core.Output;
@@ -71,7 +70,7 @@ internal static class FormattingInfoExtensions
     public static ReadOnlySpan<char> FormatToSpan(this FormattingInfo formattingInfo, Format format,
         IFormatProvider? provider, object? value)
     {
-        using var zsOutput = new ZStringOutput(ZStringBuilderExtensions.CalcCapacity(format));
+        using var zsOutput = new ZStringOutput(ZString.ZStringBuilderUtilities.CalcCapacity(format));
         using var fdObject = FormatDetailsPool.Instance.Get(out var formatDetails);
         // We don't add the nestedFormattingInfo as child to the parent, so we have to dispose it
         using var fiObject = FormattingInfoPool.Instance.Get(out var nestedFormattingInfo);

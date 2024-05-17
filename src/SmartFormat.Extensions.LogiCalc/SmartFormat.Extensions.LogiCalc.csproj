@@ -10,36 +10,7 @@ It uses extensions to provide named placeholders, localization, pluralization, g
         <AssemblyTitle>SmartFormat.Extensions.LogiCalc</AssemblyTitle>
         <AssemblyName>SmartFormat.Extensions.LogiCalc</AssemblyName>
         <PackageId>SmartFormat.Extensions.Logicalc</PackageId>
-        <PackageReleaseNotes>See the change log for the main project at
-            https://github.com/axuno/SmartFormat/blob/main/CHANGES.md
-        </PackageReleaseNotes>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageLicenseFile></PackageLicenseFile>
-        <PackageLicenseUrl></PackageLicenseUrl>
-        <PackageProjectUrl>https://github.com/axuno/SmartFormat</PackageProjectUrl>
-        <PackageIcon>SmartFormat_365x365.png</PackageIcon>
         <PackageTags>string-format stringformat template templating string-composition smartformat smart-format netstandard netcore netframework csharp c-sharp</PackageTags>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net461;net60</TargetFrameworks>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Nullable>enable</Nullable>
-        <SignAssembly>True</SignAssembly>
-        <AssemblyOriginatorKeyFile>../SmartFormat/SmartFormat.snk</AssemblyOriginatorKeyFile>
-        <Nullable>enable</Nullable>
-        <WarningsAsErrors>nullable</WarningsAsErrors>
-        <!-- Added to include SmartFormat.ZString.dll into the nuget package -->
-        <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <!-- EmbedUntrackedSources for deterministic build -->
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <PackageReadmeFile>PkgReadMe.md</PackageReadmeFile>
-        <DelaySign>False</DelaySign>
     </PropertyGroup>
 
     <ItemGroup>
@@ -48,23 +19,17 @@ It uses extensions to provide named placeholders, localization, pluralization, g
         <None Include="../../PkgReadMe.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 
-    <!-- Added to include SmartFormat.ZString.dll into the nuget package -->
-    <!-- BuildOnlySettings will add XML-docs to *.nupkg, and PDBs to *.snupkg (if generated) -->
-    <!-- The order of DependsOnTargets arguments is important  -->
-    <Target DependsOnTargets="BuildOnlySettings;ResolveReferences" Name="CopyProjectReferencesToPackage">
-        <ItemGroup>
-            <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
-        </ItemGroup>
-    </Target>
-
     <ItemGroup>
-        <PackageReference Include="Brutal.Dev.StrongNameSigner" Version="3.4.0" />
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="NCalcSync" Version="3.8.0" GeneratePathProperty="true" />
+        <PackageReference Include="NCalcSync.signed" Version="3.13.1" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net462' or '$(TargetFramework)' == 'netStandard2.0'">
         <PackageReference Include="System.Memory" Version="4.5.5" />
+        <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     </ItemGroup>
 
 </Project>

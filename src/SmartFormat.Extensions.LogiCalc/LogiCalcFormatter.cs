@@ -17,7 +17,7 @@ namespace SmartFormat.Extensions;
 /// </summary>
 /// <example>
 /// var data = new { Arg1 = 3, Arg2 = 4 };
-/// _ = Smart.Format("{:M(0.00):({Arg1} + {Arg2}) * 5}");
+/// _ = Smart.Format("{:calc(0.00):({Arg1} + {Arg2}) * 5}");
 /// result: 35.00
 /// </example>
 /// <remarks>
